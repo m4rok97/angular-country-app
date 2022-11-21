@@ -23,8 +23,6 @@ export class ByCountryComponent implements OnInit {
       (resp) => {
         console.log(resp);
         this.countries = resp;
-        this.countries[0].name;
-        this.countries[0].flags.png;
       },
       (err) => {
         this.thereWasAnError = true;
