@@ -16,9 +16,12 @@ export class ByCountryComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  search() {
+  search(term: string) {
     this.thereWasAnError = false;
+
+    this.term = term;
     console.log(this.term);
+
     this.countryService.searchCountry(this.term).subscribe(
       (resp) => {
         console.log(resp);
