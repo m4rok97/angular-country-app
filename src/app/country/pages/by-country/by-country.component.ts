@@ -11,7 +11,9 @@ export class ByCountryComponent implements OnInit {
   term: string = '';
   thereWasAnError: boolean = false;
   countries: Country[] = [];
+  hintCountries: Country[] = [];
   placeholder = 'Search by country name...';
+  showHints: boolean = false;
 
   constructor(private countryService: CountryService) {}
 
@@ -36,6 +38,20 @@ export class ByCountryComponent implements OnInit {
   }
 
   hint(term: string) {
-    console.log(term);
+    this.term = term;
+    this.countryService.searchCountry(term).subscribe({
+      next: (countries) => {
+        this.showHints = true;
+        this.hintCountries = countries.splice(0, 5);
+      },
+      error: (err) => {
+        this.hintCountries = [];
+      },
+    });
+  }
+
+  searchHint(term: string) {
+    this.search(term);
+    this.showHints = false;
   }
 }

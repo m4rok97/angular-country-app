@@ -8,6 +8,19 @@
   </div>
 </div>
 
+<ul *ngIf="showHints" class="list-group">
+  <li *ngFor="let hintCountry of hintCountries" class="list-group-item list-group-item=-action">
+    <a class="nav-link" [routerLink]="['/country', hintCountry.cca2]">
+      {{hintCountry.name.common}}
+    </a>
+  </li>
+  <li class="list-group-item list-group-item=-action">
+    <a class="nav-link" (click)="searchHint(term)">
+      Search "{{term}}"
+    </a>
+  </li>
+</ul>
+
 <hr>
 
 <div class="alert alert-danger" *ngIf="thereWasAnError">
